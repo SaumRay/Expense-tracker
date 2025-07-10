@@ -1,0 +1,15 @@
+version: 1
+frontend:
+  phases:
+    build:
+      commands:
+        - cd frontend/expense-tracker
+        - npm ci
+        - npm run build
+  artifacts:
+    baseDirectory: frontend/expense-tracker/dist
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - node_modules/**/*
