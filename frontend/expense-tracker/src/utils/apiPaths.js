@@ -1,4 +1,4 @@
-export const BASE_URL= "https://expense-tracker-backend-env.eba-xvprnpem.ap-south-1.elasticbeanstalk.com";
+export const BASE_URL= "http://expense-tracker-backend-env.eba-xvprnpem.ap-south-1.elasticbeanstalk.com";
 
 // utils/apiPaths.js
 export const API_PATHS ={
