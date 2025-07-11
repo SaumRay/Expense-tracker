@@ -1,34 +1,36 @@
 require("dotenv").config();
-const express=require("express");
-const cors=require("cors");
-const path=require("path");
-const connectDB=require("./config/db");
-const authRoutes=require("./routes/authRoutes");
-const incomeRoutes=require("./routes/incomeRoutes");
-const expenseRoutes=require("./routes/expenseRoutes");
-const dashboardRoutes=require("./routes/dashboardRoutes");
+const express = require("express");
+const cors = require("cors");
+const path = require("path");
+const connectDB = require("./config/db");
+const authRoutes = require("./routes/authRoutes");
+const incomeRoutes = require("./routes/incomeRoutes");
+const expenseRoutes = require("./routes/expenseRoutes");
+const dashboardRoutes = require("./routes/dashboardRoutes");
 
-const app=express();
+const app = express();
 
-//Middlwware to handle CORS
+// Middleware to handle CORS
 app.use(
     cors({
         origin: process.env.CLIENT_URL || "*",
-        methods: ["GET","POST","PUT","DELETE"],
-        allowedHeaders: ["content-Type","Authorization"],
+        methods: ["GET", "POST", "PUT", "DELETE"],
+        allowedHeaders: ["Content-Type", "Authorization"],
     })
 );
 
 app.use(express.json());
 connectDB();
 
+app.get('/', (req, res) => res.send('Expense Tracker Backend is running!'));
+
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/income", incomeRoutes);
 app.use("/api/v1/expense", expenseRoutes);
 app.use("/api/v1/dashboard", dashboardRoutes);
 
-//Serve uploads folder
-app.use("/uploads", express.static(path.join(__dirname,"uploads")));
+// Serve uploads folder
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
-const PORT= process.env.PORT || 8080;
+const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
